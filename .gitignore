@@ -3,6 +3,11 @@
 # dependencies
 node_modules/
 
+
+# Folders
+jobsift-starter/
+
+
 # Expo
 .expo/
 dist/
