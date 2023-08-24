@@ -5,6 +5,15 @@
   },
   "baseUrl": ".",
   "paths": {
-    "@/*": ["src/*"]
+    "@/*": ["src/*"],
+    "@shared-components/*": ["shared/components/*"],
+    "@shared-constants/*": ["shared/constant/*"],
+    "@pages/*": ["pages/*"],
+    "@lib/*": ["lib/*"],
+    "@themes": ["shared/constant/theme/index"],
+    "@assets": ["assets/*"],
+    "@features": ["features/*"],
+    "@services": ["services/*"],
+    "@types/*": ["@types/*"]
   }
 }
