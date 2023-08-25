@@ -1,11 +1,12 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import icons from '../constants/icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import icons from '../constants/icons';
 
 type MenuItemProps = {
-  onPress: () => void;
+  onPress?: () => void;
 };
+
 const MenuIcon = ({ onPress }: MenuItemProps) => {
   return (
     <TouchableOpacity onPress={onPress}>

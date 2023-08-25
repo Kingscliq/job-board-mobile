@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/features/Home/Home.Module';
 import Signin from './src/features/Auth/components/Signin';
+import MenuIcon from './src/shared/components/MenuIcon';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,7 +15,7 @@ export default function App() {
           name="Home"
           component={Home}
           options={{
-            headerLeft: () => <Text>Menu</Text>,
+            headerLeft: () => <MenuIcon />,
             headerRight: () => <Text>Home Icon</Text>,
           }}
         />

@@ -8,15 +8,15 @@
   "baseUrl": ".",
   "paths": {
     "@/*": ["src/*"],
-    "@shared-components/*": ["src/shared/components/*"],
-    "@shared-constants/*": ["src/shared/constant/*"],
-    "@pages/*": ["src/pages/*"],
-    "@lib/*": ["src/lib/*"],
-    "@themes": ["src/shared/constant/theme/index"],
-    "@assets": ["src/assets/*"],
-    "@features": ["src/features/*"],
-    "@services": ["src/services/*"],
-    "@screens/*": ["src/screens/*"],
-    "@types/*": ["src/types/*"]
+    "@shared-components/*": ["shared/components/*"],
+    "@shared-constants/*": ["shared/constant/*"],
+    "@pages/*": ["pages/*"],
+    "@lib/*": ["lib/*"],
+    "@themes": ["shared/constant/theme/index"],
+    "@assets": ["assets/*"],
+    "@features": ["features/*"],
+    "@services": ["services/*"],
+    "@screens/*": ["screens/*"],
+    "@types/*": ["types/*"]
   }
 }
