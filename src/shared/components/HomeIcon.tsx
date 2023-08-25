@@ -2,15 +2,15 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import icons from '../constants/icons';
 
-type MenuItemProps = {
+type HomeIconProps = {
   onPress?: () => void;
 };
 
-const MenuIcon = ({ onPress }: MenuItemProps) => {
+const HomeIcon = ({ onPress }: HomeIconProps) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <Image
-        source={icons.menu}
+        source={icons.location}
         resizeMode="cover"
         style={styles.btnImage}
         alt="menu-icon"
@@ -19,7 +19,7 @@ const MenuIcon = ({ onPress }: MenuItemProps) => {
   );
 };
 
-export default MenuIcon;
+export default HomeIcon;
 
 const styles = StyleSheet.create({
   btnImage: {

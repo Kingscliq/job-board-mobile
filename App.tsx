@@ -4,10 +4,29 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/features/Home/Home.Module';
 import Signin from './src/features/Auth/components/Signin';
 import MenuIcon from './src/shared/components/MenuIcon';
-
+import HomeIcon from './src/shared/components/HomeIcon';
+import { useFonts } from 'expo-font';
+import { useCallback } from 'react';
+import * as SplashScreen from 'expo-splash-screen';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [fontsLoaded, fontError] = useFonts({
+    'DMSans-600': require('./assets/fonts/DMSans-Bold.ttf'),
+    'DMSans-500': require('./assets/fonts/DMSans-Medium.ttf'),
+    'DMSans-400': require('./assets/fonts/DMSans-Regular.ttf'),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
@@ -16,7 +35,8 @@ export default function App() {
           component={Home}
           options={{
             headerLeft: () => <MenuIcon />,
-            headerRight: () => <Text>Home Icon</Text>,
+            headerRight: () => <HomeIcon />,
+            headerTitle: '',
           }}
         />
         <Stack.Screen name="Signin" component={Signin} />
