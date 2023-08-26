@@ -5,6 +5,7 @@ import {
   NativeSyntheticEvent,
   TextInputChangeEventData,
   StyleSheet,
+  StyleProp,
 } from 'react-native';
 import React, { ReactNode } from 'react';
 
@@ -23,6 +24,7 @@ interface ITextInputProps {
   message?: string;
   disabled?: boolean;
   icon?: ReactNode;
+  style?: StyleProp<any>;
 }
 const TextField = ({
   placeholder,
@@ -30,13 +32,14 @@ const TextField = ({
   iconLeft,
   iconRight,
   onChange,
+  style,
   value,
 }: ITextInputProps) => {
   return (
     <View style={styles.container}>
       {label && <Text>{label}</Text>}
       <TextInput
-        style={styles.input}
+        style={Object.assign({}, styles.input, style)}
         value={value}
         placeholder={placeholder}
         onChangeText={onChange}
