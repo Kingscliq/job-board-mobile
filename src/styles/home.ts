@@ -19,27 +19,20 @@ interface Styles {
   tabsContainer: StyleProp<ViewStyle>;
   container: StyleProp<ViewStyle>;
   searchInput: StyleProp<ViewStyle>;
+  activeTabText: StyleProp<TextStyle>;
+  activeTab: StyleProp<ViewStyle>;
 }
 
-export const dynamicStyles = {
+interface TabStyles {
   tab: (
     activeJobType: string,
     item: string
-  ): ViewStyle | TextStyle | ImageStyle => ({
-    paddingVertical: SIZES.small / 2,
-    paddingHorizontal: SIZES.small,
-    borderRadius: SIZES.medium,
-    borderWidth: 1,
-    borderColor: activeJobType === item ? COLORS.secondary : COLORS.gray2,
-  }),
+  ) => ViewStyle | TextStyle | ImageStyle;
   tabText: (
-    activeJobType: any,
-    item: any
-  ): ViewStyle | TextStyle | ImageStyle => ({
-    fontFamily: FONT.medium,
-    color: activeJobType === item ? COLORS.secondary : COLORS.gray2,
-  }),
-};
+    activeJobType: string,
+    item: string
+  ) => ViewStyle | TextStyle | ImageStyle;
+}
 
 const styles: Styles = StyleSheet.create({
   container: {
@@ -97,6 +90,28 @@ const styles: Styles = StyleSheet.create({
   tabsContainer: {
     width: '100%',
     marginTop: SIZES.medium,
+  },
+  activeTab: {
+    paddingVertical: SIZES.small / 2,
+    paddingHorizontal: SIZES.small,
+    borderRadius: SIZES.medium,
+    borderWidth: 1,
+    borderColor: COLORS.secondary,
+  },
+  tab: {
+    paddingVertical: SIZES.small / 2,
+    paddingHorizontal: SIZES.small,
+    borderRadius: SIZES.medium,
+    borderWidth: 1,
+    borderColor: COLORS.gray2,
+  },
+  activeTabText: {
+    fontFamily: FONT.medium,
+    color: COLORS.secondary,
+  },
+  tabText: {
+    fontFamily: FONT.medium,
+    color: COLORS.gray2,
   },
 });
 
