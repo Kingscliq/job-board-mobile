@@ -8,7 +8,7 @@ import {
 import { COLORS, FONT, SIZES } from '../shared/constants/theme';
 
 interface Styles {
-  tab?: StyleProp<TextStyle>;
+  tab?: StyleProp<ViewStyle>;
   tabText?: StyleProp<TextStyle>;
   userName: StyleProp<TextStyle>;
   welcomeMessage: StyleProp<TextStyle>;
@@ -21,9 +21,32 @@ interface Styles {
   searchInput: StyleProp<ViewStyle>;
 }
 
+export const dynamicStyles = {
+  tab: (
+    activeJobType: string,
+    item: string
+  ): ViewStyle | TextStyle | ImageStyle => ({
+    paddingVertical: SIZES.small / 2,
+    paddingHorizontal: SIZES.small,
+    borderRadius: SIZES.medium,
+    borderWidth: 1,
+    borderColor: activeJobType === item ? COLORS.secondary : COLORS.gray2,
+  }),
+  tabText: (
+    activeJobType: any,
+    item: any
+  ): ViewStyle | TextStyle | ImageStyle => ({
+    fontFamily: FONT.medium,
+    color: activeJobType === item ? COLORS.secondary : COLORS.gray2,
+  }),
+};
+
 const styles: Styles = StyleSheet.create({
   container: {
     width: '100%',
+    flex: 1,
+    alignContent: 'center',
+    paddingHorizontal: 15,
   },
   userName: {
     fontFamily: FONT.regular,
@@ -75,17 +98,6 @@ const styles: Styles = StyleSheet.create({
     width: '100%',
     marginTop: SIZES.medium,
   },
-  //   tab: (activeJobType: number, item: number): StyleProp<ViewStyle> => ({
-  //     paddingVertical: SIZES.small / 2,
-  //     paddingHorizontal: SIZES.small,
-  //     borderRadius: SIZES.medium,
-  //     borderWidth: 1,
-  //     borderColor: activeJobType === item ? COLORS.secondary : COLORS.gray2,
-  //   }),
-  //   tabText: (activeJobType: any, item: any): StyleProp<TextStyle> => ({
-  //     fontFamily: FONT.medium,
-  //     color: activeJobType === item ? COLORS.secondary : COLORS.gray2,
-  //   }),
 });
 
 export default styles;

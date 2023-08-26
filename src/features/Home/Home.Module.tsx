@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  FlatList,
   Image,
   NativeSyntheticEvent,
   StyleSheet,
@@ -22,10 +23,11 @@ const Home = () => {
     setText(text);
   };
 
+  const tabItems = ['Full-time', 'Part-time', 'Contract'];
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <Text style={styles.userName}>Welcome to Home</Text>
+        <Text style={styles.userName}>Hi, Chidex</Text>
         <Text style={styles.welcomeMessage}> Find your next Job</Text>
       </View>
       <View style={styles.searchContainer}>
@@ -38,8 +40,21 @@ const Home = () => {
           />
         </View>
         <TouchableOpacity style={styles.searchBtn}>
-          <Image source={icons.search} />
+          <Image source={icons.search} style={styles.searchBtnImage} />
         </TouchableOpacity>
+      </View>
+
+      <View>
+        <FlatList
+          data={tabItems}
+          renderItem={({ item }: { item: string }) => {
+            return (
+              <TouchableOpacity style={styles.tabsContainer}>
+                <Text>{item}</Text>
+              </TouchableOpacity>
+            );
+          }}
+        />
       </View>
     </SafeAreaView>
   );

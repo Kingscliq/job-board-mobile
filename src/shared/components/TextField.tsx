@@ -36,15 +36,15 @@ const TextField = ({
   value,
 }: ITextInputProps) => {
   return (
-    <View style={styles.container}>
-      {label && <Text>{label}</Text>}
-      <TextInput
-        style={Object.assign({}, styles.input, style)}
-        value={value}
-        placeholder={placeholder}
-        onChangeText={onChange}
-      />
-    </View>
+    // <View style={styles.container}>
+    //   {label && <Text>{label}</Text>}
+    <TextInput
+      style={Object.assign({}, styles.input, style)}
+      value={value}
+      placeholder={placeholder}
+      onChangeText={onChange}
+    />
+    // </View>
   );
 };
 
