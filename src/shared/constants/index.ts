@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://jsearch.p.rapidapi.com';
+export const BASE_URL = 'https://findwork.dev/api/';
