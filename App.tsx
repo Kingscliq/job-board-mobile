@@ -8,7 +8,10 @@ import HomeIcon from './src/shared/components/HomeIcon';
 import { useFonts } from 'expo-font';
 import { useCallback } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
 const Stack = createNativeStackNavigator();
+const queryClient = new QueryClient();
 
 export default function App() {
   const [fontsLoaded, fontError] = useFonts({
@@ -29,18 +32,20 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{
-            headerLeft: () => <MenuIcon />,
-            headerRight: () => <HomeIcon />,
-            headerTitle: '',
-          }}
-        />
-        <Stack.Screen name="Signin" component={Signin} />
-      </Stack.Navigator>
+      <QueryClientProvider client={queryClient}>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{
+              headerLeft: () => <MenuIcon />,
+              headerRight: () => <HomeIcon />,
+              headerTitle: '',
+            }}
+          />
+          <Stack.Screen name="Signin" component={Signin} />
+        </Stack.Navigator>
+      </QueryClientProvider>
     </NavigationContainer>
   );
 }

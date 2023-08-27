@@ -1,8 +1,11 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import styles from '../../../styles/popular-jobs';
+import { useQuery } from '@tanstack/react-query';
 
 const PopularJobs = () => {
+
+   
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -15,6 +18,8 @@ const PopularJobs = () => {
           </TouchableOpacity>
         </View>
       </View>
+
+      <View></View>
     </View>
   );
 };
