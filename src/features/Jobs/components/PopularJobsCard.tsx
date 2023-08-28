@@ -2,16 +2,9 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import { Jobs } from '../../../types/jobs';
 import images from '../../../shared/constants/images';
-import { checkImageURL } from '../../../lib/helpers';
+import { COLORS, FONT, SIZES } from '../../../shared/constants/theme';
+import { EvilIcons } from '@expo/vector-icons';
 
-// id: string;
-//   role: string;
-//   company_name: string;
-//   company_num_employees: string;
-//   employment_type: string;
-//   location: string;
-//   remote: boolean;
-//   logo: string;
 interface IPopularJobsCard {
   item: Jobs;
 }
@@ -27,24 +20,27 @@ const PopularJobsCard = ({
   },
 }: IPopularJobsCard) => {
   return (
-    <TouchableOpacity style={styles.container}>
-      <View>
+    <TouchableOpacity style={styles.container} activeOpacity={0.5}>
+      <View style={{ flex: 1 }}>
         <Image
-          source={{
-            uri: checkImageURL(logo) ? logo : images.companyDummy,
-          }}
+          source={images.profile}
           alt="Company Logo"
           resizeMode="contain"
+          style={styles.logo}
         />
       </View>
-      <View>
-        <Text>{company_name}</Text>
-        <Text>{role}</Text>
-        <Text>{location}</Text>
+      <View style={styles.description}>
+        <Text style={styles.company_name}>{company_name}</Text>
+        <Text numberOfLines={1}>{role}</Text>
+        <Text style={styles.location}>{location}</Text>
       </View>
-      <View>
-        <Image source={images.profile} style={styles.heart} />
-        <Text>4d</Text>
+      <View style={styles.favourite}>
+        <View>
+          <EvilIcons name="heart" size={24} color="black" />
+        </View>
+        <View style={styles.date_container}>
+          <Text style={styles.date_posted}>4d</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -57,18 +53,52 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    padding: 10,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    elevation: 5, // Android box shadow
+    shadowColor: COLORS.gray2, // iOS shadow color
+    shadowOffset: { width: 0, height: 2 }, // iOS shadow offset
+    shadowOpacity: 0.3, // iOS shadow opacity
+    shadowRadius: 5, // iOS shadow radius
+    marginVertical: 5,
   },
   logo: {
     height: 30,
     width: 30,
   },
-  title: {},
-  description: {},
-  company_name: {},
-  date_posted: {},
+  title: {
+    fontSize: SIZES.xLarge,
+    fontFamily: FONT.bold,
+    fontWeight: 'bold',
+  },
+  description: {
+    flex: 5,
+    paddingHorizontal: 10,
+  },
+  company_name: {
+    fontSize: SIZES.small,
+    color: COLORS.gray2,
+  },
+  date_posted: {
+    fontSize: SIZES.xSmall,
+  },
   heart: {
     height: 30,
     width: 30,
+  },
+  favourite: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: 10,
+  },
+  date_container: {
+    marginBottom: 0,
+  },
+  location: {
+    color: COLORS.gray2,
+    fontSize: SIZES.xSmall,
   },
 });

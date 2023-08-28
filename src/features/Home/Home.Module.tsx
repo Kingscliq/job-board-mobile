@@ -11,7 +11,6 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { COLORS } from '../../shared/constants/theme';
 import TextField from '../../shared/components/TextField';
 import icons from '../../shared/constants/icons';
 import styles from '../../styles/home';
