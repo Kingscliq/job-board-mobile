@@ -15,6 +15,8 @@ import TextField from '../../shared/components/TextField';
 import icons from '../../shared/constants/icons';
 import styles from '../../styles/home';
 import PopularJobs from '../Jobs/components/PopularJobs';
+import { COLORS } from '../../shared/constants/theme';
+import NearbyJobs from '../Jobs/components/NearbyJobs';
 
 const Home = () => {
   const [text, setText] = useState<string>('');
@@ -31,6 +33,7 @@ const Home = () => {
         <Text style={styles.userName}>Hi, Chidex</Text>
         <Text style={styles.welcomeMessage}>Find your next Job</Text>
       </View>
+
       <View style={styles.searchContainer}>
         <View style={styles.searchWrapper}>
           <TextField
@@ -72,6 +75,9 @@ const Home = () => {
       </View>
       <View>
         <PopularJobs />
+      </View>
+      <View>
+        <NearbyJobs />
       </View>
     </SafeAreaView>
   );

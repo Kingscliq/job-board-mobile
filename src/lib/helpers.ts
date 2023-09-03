@@ -8,3 +8,8 @@ export const checkImageURL = (url: string) => {
     return pattern.test(url);
   }
 };
+
+export const truncate = (str: string, length: number) => {
+  let dots = str?.length > length ? '...' : '';
+  return str?.substring(0, length) + dots;
+};

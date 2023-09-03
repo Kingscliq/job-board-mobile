@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { axios } from '../../lib/axios';
 import { useMemo, useState } from 'react';
+import { Jobs } from '../../types/jobs';
 
 type queryTypes = {
   query: string;
@@ -20,7 +21,6 @@ export const useFetchPopularJobs = () => {
     await axios
       .get('/jobs', { params })
       .then(res => {
-        console.log(res.data);
         return res.data;
       })
       .catch(err => console.log(err));
@@ -35,7 +35,13 @@ export const useFetchPopularJobs = () => {
     () => fetchPopularJobs(queryParams)
   );
 
+  const filteredData = useMemo(
+    () => popularJobs?.results?.filter((item: Jobs) => item.logo !== null),
+    [popularJobs]
+  );
+
   return {
+    filteredData,
     popularJobs,
     isLoadingPopularJobs,
     setQuery,

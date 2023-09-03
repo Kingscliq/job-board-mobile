@@ -4,12 +4,11 @@ import { Jobs } from '../../../types/jobs';
 import images from '../../../shared/constants/images';
 import { COLORS, FONT, SIZES } from '../../../shared/constants/theme';
 import { EvilIcons } from '@expo/vector-icons';
-import { truncate } from '../../../lib/helpers';
 
 interface INearByJobsCard {
   item: Jobs;
 }
-const PopularJobsCard = ({
+const NearbyJobsCard = ({
   item: {
     role,
     company_name,
@@ -22,9 +21,9 @@ const PopularJobsCard = ({
 }: INearByJobsCard) => {
   return (
     <TouchableOpacity style={styles.container} activeOpacity={0.5}>
-      <View>
+      <View style={{ flex: 1 }}>
         <Image
-          source={{ uri: `${logo}` }}
+          source={{ uri: `https://source.unsplash.com/random?${role}` }}
           alt="Company Logo"
           resizeMode="contain"
           style={styles.logo}
@@ -32,22 +31,31 @@ const PopularJobsCard = ({
       </View>
       <View style={styles.description}>
         <Text style={styles.company_name}>{company_name}</Text>
-        <Text style={styles.title}>{truncate(role, 15)}</Text>
+        <Text numberOfLines={1}>{role}</Text>
         <Text style={styles.location}>{location}</Text>
+      </View>
+      <View style={styles.favourite}>
+        <View>
+          <EvilIcons name="heart" size={24} color="black" />
+        </View>
+        <View style={styles.date_container}>
+          <Text style={styles.date_posted}>4d</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
 };
 
-export default PopularJobsCard;
+export default NearbyJobsCard;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     padding: 10,
-    backgroundColor: '#efefec',
+    backgroundColor: 'white',
     borderRadius: 10,
     elevation: 5, // Android box shadow
     shadowColor: COLORS.gray2, // iOS shadow color
@@ -55,25 +63,19 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3, // iOS shadow opacity
     shadowRadius: 5, // iOS shadow radius
     marginVertical: 5,
-    height: 100,
   },
   logo: {
     height: 30,
     width: 30,
   },
   title: {
-    fontSize: SIZES.small,
+    fontSize: SIZES.xLarge,
     fontFamily: FONT.bold,
     fontWeight: 'bold',
   },
   description: {
+    flex: 5,
     paddingHorizontal: 10,
-    marginVertical: 30,
-    marginTop: 5,
-  },
-  imageContainer: {
-    height: 100,
-    width: 100,
   },
   company_name: {
     fontSize: SIZES.small,

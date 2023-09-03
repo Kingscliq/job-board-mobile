@@ -11,14 +11,13 @@ import styles from '../../../styles/popular-jobs';
 import { useFetchPopularJobs } from '../api';
 import { Jobs } from '../../../types/jobs';
 import PopularJobsCard from './PopularJobsCard';
+import { SIZES } from '../../../shared/constants/theme';
 
 const PopularJobs = () => {
-  const { popularJobs, isLoadingPopularJobs } = useFetchPopularJobs();
-
-  console.log(popularJobs?.results[0]);
+  const { filteredData, isLoadingPopularJobs } = useFetchPopularJobs();
 
   const renderItem: ListRenderItem<Jobs> = ({ item }) => (
-    <PopularJobsCard item={item} />
+    <PopularJobsCard item={item} key={item?.id} />
   );
 
   return (
@@ -34,8 +33,13 @@ const PopularJobs = () => {
         </View>
       </View>
       {isLoadingPopularJobs && <ActivityIndicator />}
-      {popularJobs?.results?.length > 0 && (
-        <FlatList data={popularJobs?.results} renderItem={renderItem} />
+      {filteredData?.length > 0 && (
+        <FlatList
+          data={filteredData}
+          renderItem={renderItem}
+          contentContainerStyle={{ columnGap: SIZES.medium }}
+          horizontal
+        />
       )}
       <View></View>
     </View>
