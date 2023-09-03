@@ -1,10 +1,18 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  LogBox,
+} from 'react-native';
 import React from 'react';
 import { Jobs } from '../../../types/jobs';
 import images from '../../../shared/constants/images';
 import { COLORS, FONT, SIZES } from '../../../shared/constants/theme';
 import { EvilIcons } from '@expo/vector-icons';
 import { truncate } from '../../../lib/helpers';
+import JobImage from '../../../shared/components/JobImage';
 
 interface INearByJobsCard {
   item: Jobs;
@@ -22,13 +30,8 @@ const PopularJobsCard = ({
 }: INearByJobsCard) => {
   return (
     <TouchableOpacity style={styles.container} activeOpacity={0.5}>
-      <View>
-        <Image
-          source={{ uri: `${logo}` }}
-          alt="Company Logo"
-          resizeMode="contain"
-          style={styles.logo}
-        />
+      <View style={styles.imageContainer}>
+        <JobImage src={logo} styles={styles.logo} />
       </View>
       <View style={styles.description}>
         <Text style={styles.company_name}>{company_name}</Text>
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     padding: 10,
-    backgroundColor: '#efefec',
+    backgroundColor: '#fffffe',
     borderRadius: 10,
     elevation: 5, // Android box shadow
     shadowColor: COLORS.gray2, // iOS shadow color
@@ -72,8 +75,12 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   imageContainer: {
-    height: 100,
-    width: 100,
+    elevation: 5, // Android box shadow
+    shadowColor: COLORS.gray2, // iOS shadow color
+    shadowOffset: { width: 0, height: 2 }, // iOS shadow offset
+    shadowOpacity: 0.3, // iOS shadow opacity
+    shadowRadius: 5, // iOS shadow radius
+    paddingHorizontal: 10,
   },
   company_name: {
     fontSize: SIZES.small,
