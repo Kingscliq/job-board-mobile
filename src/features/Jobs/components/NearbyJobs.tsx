@@ -15,7 +15,7 @@ import { SIZES } from '../../../shared/constants/theme';
 import NearbyJobsCard from './NearbyJobsCard';
 
 const NearbyJobs = () => {
-  const { popularJobs, isLoadingPopularJobs } = useFetchPopularJobs();
+  const { popularJobs, isLoadingPopularJobs } = useFetchPopularJobs(true);
 
   const renderItem: ListRenderItem<Jobs> = ({ item }) => (
     <NearbyJobsCard item={item} key={item?.id} />

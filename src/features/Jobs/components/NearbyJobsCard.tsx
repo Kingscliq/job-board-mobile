@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import { Jobs } from '../../../types/jobs';
-import images from '../../../shared/constants/images';
 import { COLORS, FONT, SIZES } from '../../../shared/constants/theme';
 import { EvilIcons } from '@expo/vector-icons';
+import JobImage from '../../../shared/components/JobImage';
 
 interface INearByJobsCard {
   item: Jobs;
@@ -22,12 +22,7 @@ const NearbyJobsCard = ({
   return (
     <TouchableOpacity style={styles.container} activeOpacity={0.5}>
       <View style={{ flex: 1 }}>
-        <Image
-          source={{ uri: `https://source.unsplash.com/random?${role}` }}
-          alt="Company Logo"
-          resizeMode="contain"
-          style={styles.logo}
-        />
+        <JobImage src={logo} styles={styles.logo} />
       </View>
       <View style={styles.description}>
         <Text style={styles.company_name}>{company_name}</Text>
