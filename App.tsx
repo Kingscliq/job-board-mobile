@@ -30,6 +30,7 @@ export default function App() {
     return null;
   }
 
+  console.log('Hello');
   return (
     <NavigationContainer>
       <QueryClientProvider client={queryClient}>
