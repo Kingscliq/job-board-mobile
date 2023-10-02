@@ -10,12 +10,15 @@ type queryTypes = {
   location: string;
   sort_by: string;
 };
+
 export const useFetchPopularJobs = (isNearBy?: boolean) => {
   const [query, setQuery] = useState<string>('');
   const [page, setPage] = useState<number>(1);
   const [num_pages, setNumPage] = useState<number>(10);
   const [location, setLocation] = useState<string>(isNearBy ? 'US' : '');
   const [sort_by, setSortBy] = useState<string>('');
+
+  const [selectedJobs, setSelectedJobs] = useState<Jobs | null>(null);
 
   const fetchPopularJobs = async (params: queryTypes) =>
     await axios
@@ -40,6 +43,10 @@ export const useFetchPopularJobs = (isNearBy?: boolean) => {
     [popularJobs]
   );
 
+  // const selectedJob = useMemo(
+  //   () => popularJobs?.filter((item: Jobs) => item?.id),
+  //   [popularJobs]
+  // );
   return {
     filteredData,
     popularJobs,

@@ -14,6 +14,7 @@ import PopularJobsCard from './PopularJobsCard';
 import { SIZES } from '../../../shared/constants/theme';
 
 const PopularJobs = () => {
+  
   const { filteredData, isLoadingPopularJobs } = useFetchPopularJobs(false);
 
   const renderItem: ListRenderItem<Jobs> = ({ item }) => (

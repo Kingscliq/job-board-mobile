@@ -1,21 +1,10 @@
 import React, { useState } from 'react';
-import {
-  FlatList,
-  Image,
-  NativeSyntheticEvent,
-  StyleSheet,
-  Text,
-  TextInput,
-  TextInputChangeEventData,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import TextField from '../../shared/components/TextField';
 import icons from '../../shared/constants/icons';
 import styles from '../../styles/home';
 import PopularJobs from '../Jobs/components/PopularJobs';
-import { COLORS } from '../../shared/constants/theme';
 import NearbyJobs from '../Jobs/components/NearbyJobs';
 
 const Home = () => {
@@ -26,8 +15,6 @@ const Home = () => {
   };
 
   const tabItems = ['Full-time', 'Part-time', 'Contract'];
-
-  console.log({ tabItems });
 
   return (
     <SafeAreaView style={styles.container}>
@@ -79,7 +66,7 @@ const Home = () => {
         <PopularJobs />
       </View>
       <View>
-        <NearbyJobs/>
+        <NearbyJobs />
       </View>
     </SafeAreaView>
   );

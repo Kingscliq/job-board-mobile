@@ -10,7 +10,6 @@ import React from 'react';
 import styles from '../../../styles/popular-jobs';
 import { useFetchPopularJobs } from '../api';
 import { Jobs } from '../../../types/jobs';
-import PopularJobsCard from './PopularJobsCard';
 import { SIZES } from '../../../shared/constants/theme';
 import NearbyJobsCard from './NearbyJobsCard';
 

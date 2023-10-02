@@ -1,32 +1,16 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  LogBox,
-} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { Jobs } from '../../../types/jobs';
-import images from '../../../shared/constants/images';
 import { COLORS, FONT, SIZES } from '../../../shared/constants/theme';
-import { EvilIcons } from '@expo/vector-icons';
 import { truncate } from '../../../lib/helpers';
 import JobImage from '../../../shared/components/JobImage';
 
 interface INearByJobsCard {
   item: Jobs;
 }
+
 const PopularJobsCard = ({
-  item: {
-    role,
-    company_name,
-    company_num_employees,
-    employment_type,
-    location,
-    remote,
-    logo,
-  },
+  item: { role, company_name, location, logo },
 }: INearByJobsCard) => {
   return (
     <TouchableOpacity style={styles.container} activeOpacity={0.5}>
