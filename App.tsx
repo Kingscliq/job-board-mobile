@@ -9,6 +9,7 @@ import { useFonts } from 'expo-font';
 import { useCallback } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import JobDetail from './src/features/Jobs/components/JobDetail';
 
 const Stack = createNativeStackNavigator();
 const queryClient = new QueryClient();
@@ -42,6 +43,15 @@ export default function App() {
               headerLeft: () => <MenuIcon />,
               headerRight: () => <HomeIcon />,
               headerTitle: '',
+            }}
+          />
+          <Stack.Screen
+            name="JobDetail"
+            component={JobDetail}
+            options={{
+              headerLeft: () => <MenuIcon />,
+              headerRight: () => <HomeIcon />,
+              headerTitle: 'Job Detail',
             }}
           />
           <Stack.Screen name="Signin" component={Signin} />

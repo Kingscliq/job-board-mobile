@@ -4,6 +4,8 @@ import { Jobs } from '../../../types/jobs';
 import { COLORS, FONT, SIZES } from '../../../shared/constants/theme';
 import { EvilIcons } from '@expo/vector-icons';
 import JobImage from '../../../shared/components/JobImage';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 interface INearByJobsCard {
   item: Jobs;
@@ -17,10 +19,20 @@ const NearbyJobsCard = ({
     location,
     remote,
     logo,
+    id,
   },
 }: INearByJobsCard) => {
+  const navigation =
+    useNavigation<
+      StackNavigationProp<{ JobDetail: { jobId: string } }, 'JobDetail'>
+    >();
+
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.5}>
+    <TouchableOpacity
+      style={styles.container}
+      activeOpacity={0.5}
+      onPress={() => navigation.navigate('JobDetail', { jobId: id })}
+    >
       <View style={{ flex: 1 }}>
         <JobImage src={logo} styles={styles.logo} />
       </View>

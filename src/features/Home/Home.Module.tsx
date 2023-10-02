@@ -27,6 +27,8 @@ const Home = () => {
 
   const tabItems = ['Full-time', 'Part-time', 'Contract'];
 
+  console.log({ tabItems });
+
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -77,7 +79,7 @@ const Home = () => {
         <PopularJobs />
       </View>
       <View>
-        <NearbyJobs />
+        <NearbyJobs/>
       </View>
     </SafeAreaView>
   );
