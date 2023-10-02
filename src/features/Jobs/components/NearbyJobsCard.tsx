@@ -24,14 +24,19 @@ const NearbyJobsCard = ({
 }: INearByJobsCard) => {
   const navigation =
     useNavigation<
-      StackNavigationProp<{ JobDetail: { jobId: string } }, 'JobDetail'>
+      StackNavigationProp<
+        { JobDetail: { jobId: string; name: string } },
+        'JobDetail'
+      >
     >();
 
   return (
     <TouchableOpacity
       style={styles.container}
       activeOpacity={0.5}
-      onPress={() => navigation.navigate('JobDetail', { jobId: id })}
+      onPress={() =>
+        navigation.navigate('JobDetail', { jobId: id, name: role })
+      }
     >
       <View style={{ flex: 1 }}>
         <JobImage src={logo} styles={styles.logo} />

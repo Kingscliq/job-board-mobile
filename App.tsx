@@ -10,8 +10,11 @@ import { useCallback } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import JobDetail from './src/features/Jobs/components/JobDetail';
+import { Ionicons } from '@expo/vector-icons';
+import { EvilIcons } from '@expo/vector-icons';
 
 const Stack = createNativeStackNavigator();
+
 const queryClient = new QueryClient();
 
 export default function App() {
@@ -31,7 +34,6 @@ export default function App() {
     return null;
   }
 
-  console.log('Hello');
   return (
     <NavigationContainer>
       <QueryClientProvider client={queryClient}>
@@ -41,7 +43,9 @@ export default function App() {
             component={Home}
             options={{
               headerLeft: () => <MenuIcon />,
-              headerRight: () => <HomeIcon />,
+              headerRight: () => (
+                <Ionicons name="ios-home" size={24} color="black" />
+              ),
               headerTitle: '',
             }}
           />
@@ -49,8 +53,12 @@ export default function App() {
             name="JobDetail"
             component={JobDetail}
             options={{
-              headerLeft: () => <MenuIcon />,
-              headerRight: () => <HomeIcon />,
+              headerLeft: () => (
+                <Ionicons name="arrow-back" size={24} color="black" />
+              ),
+              headerRight: () => (
+                <EvilIcons name="share-google" size={24} color="black" />
+              ),
               headerTitle: 'Job Detail',
             }}
           />
