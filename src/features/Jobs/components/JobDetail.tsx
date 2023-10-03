@@ -2,6 +2,8 @@ import React, { useCallback, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
   Button,
+  FlatList,
+  ListRenderItem,
   ScrollView,
   StyleSheet,
   Text,
@@ -17,6 +19,7 @@ import { COLORS, FONT, SIZES } from '../../../shared/constants/theme';
 import { truncate } from '../../../lib/helpers';
 import HTMLView from 'react-native-htmlview';
 import { Linking } from 'react-native';
+import Badge from '../../../shared/components/Badge';
 
 const JobDetail = () => {
   const [text, setText] = useState<string>('');
@@ -40,6 +43,10 @@ const JobDetail = () => {
         console.error('Failed to open URL:', err);
       }),
     []
+  );
+
+  const renderItem: ListRenderItem<string> = ({ item }) => (
+    <Badge text={item} />
   );
 
   return (
@@ -67,6 +74,18 @@ const JobDetail = () => {
               >
                 <Text style={detailStyle?.buttonText}>Apply Now</Text>
               </TouchableHighlight>
+            </View>
+            <View style={{ alignSelf: 'flex-start', marginVertical: 20 }}>
+              <Text style={{ marginBottom: 8 }}>Keywords</Text>
+              {detail?.keywords.length === 0 && <Text>No Keyword</Text>}
+              <View style={{ flexDirection: 'row' }}>
+                <FlatList
+                  data={detail?.keywords}
+                  renderItem={renderItem}
+                  contentContainerStyle={{ columnGap: SIZES.medium }}
+                  horizontal
+                />
+              </View>
             </View>
             <ScrollView style={{ paddingBottom: 300 }}>
               <Text style={detailStyle?.role}>Role Description</Text>
@@ -106,8 +125,10 @@ const detailStyle = StyleSheet.create({
   role: {
     fontFamily: FONT.regular,
     fontSize: SIZES.medium,
+    
     color: COLORS.secondary,
     fontWeight: 'bold',
+    marginBottom: 10
   },
   company_name: {
     fontFamily: FONT.regular,
@@ -143,4 +164,5 @@ const detailStyle = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
+  keyword: {},
 });
