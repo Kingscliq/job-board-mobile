@@ -7,4 +7,9 @@ export interface Jobs {
   location: string;
   remote: boolean;
   logo: string;
+  url: string;
+  text: string;
+  date_posted: string | Date;
+  keywords: string[];
+  source: string;
 }

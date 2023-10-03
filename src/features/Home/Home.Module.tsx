@@ -22,7 +22,6 @@ const Home = () => {
         <Text style={styles.userName}>Hi, Chidex</Text>
         <Text style={styles.welcomeMessage}>Find your next Job</Text>
       </View>
-
       <View style={styles.searchContainer}>
         <View style={styles.searchWrapper}>
           <TextField

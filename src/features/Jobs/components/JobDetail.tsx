@@ -1,5 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import React, { useMemo, useState } from 'react';
+import {
+  ActivityIndicator,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from '../../../styles/home';
 import { useFetchPopularJobs } from '../api';
@@ -8,6 +14,7 @@ import { Jobs } from '../../../types/jobs';
 import JobImage from '../../../shared/components/JobImage';
 import { COLORS, FONT, SIZES } from '../../../shared/constants/theme';
 import { truncate } from '../../../lib/helpers';
+import HTMLView from 'react-native-htmlview';
 
 const JobDetail = () => {
   const [text, setText] = useState<string>('');
@@ -19,7 +26,6 @@ const JobDetail = () => {
     useFetchPopularJobs(true);
 
   const route = useRoute();
-
   const jobId = (route as any).params?.jobId;
 
   const detail: Jobs = useMemo(
@@ -28,9 +34,8 @@ const JobDetail = () => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={detailStyle?.container}>
       {isLoadingPopularJobs && <ActivityIndicator />}
-
       {detail && (
         <>
           <View style={detailStyle?.imageContainer}>
@@ -42,10 +47,14 @@ const JobDetail = () => {
               <Text style={detailStyle?.role}>{detail?.company_name} /</Text>
               <View>
                 <Text style={detailStyle?.company_name}>
-                  {detail?.location}
+                  {truncate(detail?.location, 15)}
                 </Text>
               </View>
             </View>
+            <ScrollView style={{}}>
+              <Text style={detailStyle?.company_name}>Role Description</Text>
+              <HTMLView value={detail?.text} />
+            </ScrollView>
           </View>
         </>
       )}
@@ -77,25 +86,31 @@ const detailStyle = StyleSheet.create({
   },
   role: {
     fontFamily: FONT.regular,
-    fontSize: SIZES.large,
+    fontSize: SIZES.medium,
     color: COLORS.secondary,
     fontWeight: 'bold',
   },
   company_name: {
     fontFamily: FONT.regular,
-    fontSize: SIZES.large,
+    fontSize: SIZES.medium,
     color: COLORS.secondary,
   },
-
   welcomeMessage: {
     fontFamily: FONT.bold,
     fontSize: SIZES.xLarge,
     color: COLORS.primary,
     marginTop: 2,
     textAlign: 'center',
+    marginBottom: 5,
   },
   jobDescContainer: {
     alignItems: 'center',
     flexDirection: 'row',
+  },
+  container: {
+    width: '100%',
+    flex: 1,
+    alignContent: 'center',
+    paddingHorizontal: 15,
   },
 });
