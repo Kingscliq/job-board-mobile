@@ -1,13 +1,14 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
+  Button,
   ScrollView,
   StyleSheet,
   Text,
+  TouchableHighlight,
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import styles from '../../../styles/home';
 import { useFetchPopularJobs } from '../api';
 import { useRoute } from '@react-navigation/native';
 import { Jobs } from '../../../types/jobs';
@@ -15,6 +16,7 @@ import JobImage from '../../../shared/components/JobImage';
 import { COLORS, FONT, SIZES } from '../../../shared/constants/theme';
 import { truncate } from '../../../lib/helpers';
 import HTMLView from 'react-native-htmlview';
+import { Linking } from 'react-native';
 
 const JobDetail = () => {
   const [text, setText] = useState<string>('');
@@ -22,8 +24,7 @@ const JobDetail = () => {
     setText(text);
   };
 
-  const { filteredData, popularJobs, isLoadingPopularJobs } =
-    useFetchPopularJobs(true);
+  const { filteredData, isLoadingPopularJobs } = useFetchPopularJobs(true);
 
   const route = useRoute();
   const jobId = (route as any).params?.jobId;
@@ -31,6 +32,14 @@ const JobDetail = () => {
   const detail: Jobs = useMemo(
     () => filteredData && filteredData?.find((job: Jobs) => job?.id === jobId),
     [filteredData]
+  );
+
+  const handlePress = useCallback(
+    (url: string) =>
+      Linking.openURL(url).catch(err => {
+        console.error('Failed to open URL:', err);
+      }),
+    []
   );
 
   return (
@@ -51,9 +60,19 @@ const JobDetail = () => {
                 </Text>
               </View>
             </View>
-            <ScrollView style={{}}>
-              <Text style={detailStyle?.company_name}>Role Description</Text>
-              <HTMLView value={detail?.text} />
+            <View style={{ marginVertical: 10 }}>
+              <TouchableHighlight
+                style={detailStyle?.button}
+                onPress={() => handlePress(detail?.url)}
+              >
+                <Text style={detailStyle?.buttonText}>Apply Now</Text>
+              </TouchableHighlight>
+            </View>
+            <ScrollView style={{ paddingBottom: 300 }}>
+              <Text style={detailStyle?.role}>Role Description</Text>
+              <View style={{ marginBottom: 40 }}>
+                <HTMLView value={detail?.text} />
+              </View>
             </ScrollView>
           </View>
         </>
@@ -112,5 +131,16 @@ const detailStyle = StyleSheet.create({
     flex: 1,
     alignContent: 'center',
     paddingHorizontal: 15,
+  },
+  button: {
+    backgroundColor: COLORS.secondary,
+    borderRadius: 24,
+    padding: 10,
+    width: 200,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    textAlign: 'center',
   },
 });
