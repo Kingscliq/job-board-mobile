@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
-  Button,
   FlatList,
   ListRenderItem,
   ScrollView,
@@ -125,10 +124,10 @@ const detailStyle = StyleSheet.create({
   role: {
     fontFamily: FONT.regular,
     fontSize: SIZES.medium,
-    
+
     color: COLORS.secondary,
     fontWeight: 'bold',
-    marginBottom: 10
+    marginBottom: 10,
   },
   company_name: {
     fontFamily: FONT.regular,
