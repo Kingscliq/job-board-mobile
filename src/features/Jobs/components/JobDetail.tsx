@@ -86,13 +86,13 @@ const JobDetail = () => {
                   }}
                 >
                   <TouchableHighlight
-                    style={detailStyle?.buttonPrimary}
+                    style={detailStyle?.button}
                     onPress={() => handlePress(detail?.url)}
                   >
                     <Text style={detailStyle?.buttonText}>Company Info</Text>
                   </TouchableHighlight>
                   <TouchableHighlight
-                    style={detailStyle?.button}
+                    style={detailStyle?.buttonPrimary}
                     onPress={() => handlePress(detail?.url)}
                   >
                     <Text style={detailStyle?.buttonText}>Apply Now</Text>
@@ -215,7 +215,7 @@ const detailStyle = StyleSheet.create({
     marginTop: 10,
   },
   buttonPrimary: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.tertiary,
     borderRadius: 4,
     padding: 10,
     width: 100,
