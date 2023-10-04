@@ -60,11 +60,10 @@ const JobDetail = () => {
             </Text>
             <View style={detailStyle?.jobDescContainer}>
               <Text style={detailStyle?.role}>{detail?.company_name} /</Text>
-              <View>
-                <Text style={detailStyle?.company_name}>
-                  {truncate(detail?.location, 15)}
-                </Text>
-              </View>
+
+              <Text style={detailStyle?.company_name}>
+                {truncate(detail?.location, 15)}
+              </Text>
             </View>
             <View style={{ marginVertical: 10 }}>
               <TouchableHighlight
@@ -76,7 +75,11 @@ const JobDetail = () => {
             </View>
             <View style={{ alignSelf: 'flex-start', marginVertical: 20 }}>
               <Text style={{ marginBottom: 8 }}>Keywords</Text>
-              {detail?.keywords.length === 0 && <Text>No Keyword</Text>}
+              {detail?.keywords.length === 0 && (
+                <Text style={{ fontSize: 10, color: COLORS?.gray2 }}>
+                  No Keyword
+                </Text>
+              )}
               <View style={{ flexDirection: 'row' }}>
                 <FlatList
                   data={detail?.keywords}
@@ -124,10 +127,8 @@ const detailStyle = StyleSheet.create({
   role: {
     fontFamily: FONT.regular,
     fontSize: SIZES.medium,
-
     color: COLORS.secondary,
     fontWeight: 'bold',
-    marginBottom: 10,
   },
   company_name: {
     fontFamily: FONT.regular,
