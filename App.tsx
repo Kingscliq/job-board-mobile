@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/features/Home/Home.Module';
 import Signin from './src/features/Auth/components/Signin';
@@ -12,6 +12,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import JobDetail from './src/features/Jobs/components/JobDetail';
 import { Ionicons } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
+import BackIcon from './src/shared/components/Icon';
 
 const Stack = createNativeStackNavigator();
 
@@ -52,15 +53,13 @@ export default function App() {
           <Stack.Screen
             name="JobDetail"
             component={JobDetail}
-            options={{
-              headerLeft: () => (
-                <Ionicons name="arrow-back" size={24} color="black" />
-              ),
+            options={({ navigation }) => ({
+              headerLeft: () => <BackIcon navigation={navigation} />,
               headerRight: () => (
                 <EvilIcons name="share-google" size={24} color="black" />
               ),
               headerTitle: 'Job Detail',
-            }}
+            })}
           />
           <Stack.Screen name="Signin" component={Signin} />
         </Stack.Navigator>

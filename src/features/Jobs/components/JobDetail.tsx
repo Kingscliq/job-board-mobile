@@ -53,49 +53,104 @@ const JobDetail = () => {
       {isLoadingPopularJobs && <ActivityIndicator />}
       {detail && (
         <>
-          <View style={detailStyle?.imageContainer}>
-            <JobImage src={detail?.logo} styles={detailStyle?.logo} />
-            <Text style={detailStyle?.welcomeMessage}>
-              {truncate(detail?.role, 15)}
-            </Text>
-            <View style={detailStyle?.jobDescContainer}>
-              <Text style={detailStyle?.role}>{detail?.company_name} /</Text>
-
-              <Text style={detailStyle?.company_name}>
-                {truncate(detail?.location, 15)}
-              </Text>
-            </View>
-            <View style={{ marginVertical: 10 }}>
-              <TouchableHighlight
-                style={detailStyle?.button}
-                onPress={() => handlePress(detail?.url)}
+          <ScrollView>
+            <View style={detailStyle?.imageContainer}>
+              <View
+                style={{
+                  padding: 10,
+                  backgroundColor: '#fff',
+                  borderRadius: 3,
+                  width: '100%',
+                  marginBottom: 10,
+                }}
               >
-                <Text style={detailStyle?.buttonText}>Apply Now</Text>
-              </TouchableHighlight>
-            </View>
-            <View style={{ alignSelf: 'flex-start', marginVertical: 20 }}>
-              <Text style={{ marginBottom: 8 }}>Keywords</Text>
-              {detail?.keywords.length === 0 && (
-                <Text style={{ fontSize: 10, color: COLORS?.gray2 }}>
-                  No Keyword
+                <JobImage src={detail?.logo} styles={detailStyle?.logo} />
+                <Text style={detailStyle?.welcomeMessage}>
+                  {truncate(detail?.role, 15)}
                 </Text>
-              )}
-              <View style={{ flexDirection: 'row' }}>
-                <FlatList
-                  data={detail?.keywords}
-                  renderItem={renderItem}
-                  contentContainerStyle={{ columnGap: SIZES.medium }}
-                  horizontal
-                />
+                <View style={detailStyle?.jobDescContainer}>
+                  <Text style={detailStyle?.role}>
+                    {detail?.company_name} /
+                  </Text>
+                  <Text style={detailStyle?.company_name}>
+                    {truncate(detail?.location, 15)}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    marginVertical: 10,
+                    alignContent: 'center',
+                    justifyContent: 'space-between',
+                    flex: 1,
+                    flexDirection: 'row',
+                  }}
+                >
+                  <TouchableHighlight
+                    style={detailStyle?.buttonPrimary}
+                    onPress={() => handlePress(detail?.url)}
+                  >
+                    <Text style={detailStyle?.buttonText}>Company Info</Text>
+                  </TouchableHighlight>
+                  <TouchableHighlight
+                    style={detailStyle?.button}
+                    onPress={() => handlePress(detail?.url)}
+                  >
+                    <Text style={detailStyle?.buttonText}>Apply Now</Text>
+                  </TouchableHighlight>
+                </View>
               </View>
+              <View
+                style={{
+                  padding: 10,
+                  backgroundColor: '#fff',
+                  borderRadius: 3,
+                  width: '100%',
+                  marginBottom: 10,
+                }}
+              >
+                <View
+                  style={{
+                    alignSelf: 'flex-start',
+                    marginVertical: 20,
+                    marginBottom: 8,
+                  }}
+                >
+                  <Text style={{ marginBottom: 8 }}>Keywords</Text>
+                  {detail?.keywords.length === 0 && (
+                    <Text style={{ fontSize: 10, color: COLORS?.gray2 }}>
+                      No Keyword
+                    </Text>
+                  )}
+                  <View style={{ flexDirection: 'row' }}>
+                    <FlatList
+                      data={detail?.keywords}
+                      renderItem={renderItem}
+                      contentContainerStyle={{ columnGap: 2 }}
+                      horizontal
+                    />
+                  </View>
+                </View>
+                <View style={{ marginBottom: 8, alignSelf: 'flex-start' }}>
+                  <Text style={{ marginBottom: 8 }}>Source</Text>
+                  <Text style={{ fontSize: 10, color: COLORS?.gray2 }}>
+                    {detail?.source}
+                  </Text>
+                </View>
+              </View>
+              <ScrollView
+                style={{
+                  padding: 10,
+                  backgroundColor: '#fff',
+                  borderRadius: 3,
+                }}
+              >
+                <Text style={detailStyle?.roleDesc}>Role Description</Text>
+                <View style={{ marginBottom: 40 }}>
+                  <HTMLView value={detail?.text} />
+                </View>
+              </ScrollView>
             </View>
-            <ScrollView style={{ paddingBottom: 300 }}>
-              <Text style={detailStyle?.role}>Role Description</Text>
-              <View style={{ marginBottom: 40 }}>
-                <HTMLView value={detail?.text} />
-              </View>
-            </ScrollView>
-          </View>
+          </ScrollView>
         </>
       )}
     </SafeAreaView>
@@ -140,7 +195,6 @@ const detailStyle = StyleSheet.create({
     fontSize: SIZES.xLarge,
     color: COLORS.primary,
     marginTop: 2,
-    textAlign: 'center',
     marginBottom: 5,
   },
   jobDescContainer: {
@@ -155,14 +209,29 @@ const detailStyle = StyleSheet.create({
   },
   button: {
     backgroundColor: COLORS.secondary,
-    borderRadius: 24,
+    borderRadius: 4,
     padding: 10,
-    width: 200,
+    width: 100,
+    marginTop: 10,
+  },
+  buttonPrimary: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 4,
+    padding: 10,
+    width: 100,
+    marginTop: 10,
   },
   buttonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 12,
     textAlign: 'center',
   },
   keyword: {},
+  roleDesc: {
+    fontFamily: FONT.regular,
+    fontSize: SIZES.medium,
+    color: COLORS.secondary,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
 });
